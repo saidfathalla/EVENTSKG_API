@@ -525,7 +525,7 @@ public class EVENTSKG_Updater_Add extends javax.swing.JFrame {
             }
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(EVENTSKG_Updater.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_UpdateBtnActionPerformed
 
@@ -578,13 +578,13 @@ public class EVENTSKG_Updater_Add extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EVENTSKG_Updater.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Updater.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EVENTSKG_Updater.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Updater.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EVENTSKG_Updater.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Updater.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EVENTSKG_Updater.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Updater.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -592,7 +592,7 @@ public class EVENTSKG_Updater_Add extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EVENTSKG_Updater().setVisible(true);
+                new Updater().setVisible(true);
             }
 
         });
