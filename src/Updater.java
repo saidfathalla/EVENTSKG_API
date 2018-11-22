@@ -14,11 +14,13 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import static com.hp.hpl.jena.util.tuple.TupleItem.URI;
 import static com.hp.hpl.jena.vocabulary.DCTerms.URI;
 import com.hp.hpl.jena.vocabulary.RDF;
+import java.awt.Desktop;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +28,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.net.URISyntaxException;
 
 public class Updater extends javax.swing.JFrame {
 
@@ -84,6 +87,15 @@ public class Updater extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel21 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemOpenRepo = new javax.swing.JMenuItem();
+        jMenuItemExit = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItemReportIssue = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItemInstructions = new javax.swing.JMenuItem();
+        jMenuItemAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EVENTSKG Updater API");
@@ -222,6 +234,60 @@ public class Updater extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Conference", "Symposium", "Workshop" }));
 
         jLabel21.setText("DATE FORMAT: YYYY-MM-DD");
+
+        jMenu1.setText("File");
+
+        jMenuItemOpenRepo.setText("Open EVENTSKG Github repo.");
+        jMenuItemOpenRepo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemOpenRepoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemOpenRepo);
+
+        jMenuItemExit.setText("Exit");
+        jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemExitActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemExit);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu3.setText("Tools");
+
+        jMenuItemReportIssue.setText("Report issue");
+        jMenuItemReportIssue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemReportIssueActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItemReportIssue);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu2.setText("Help");
+
+        jMenuItemInstructions.setText("Instructions");
+        jMenuItemInstructions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemInstructionsActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemInstructions);
+
+        jMenuItemAbout.setText("About");
+        jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAboutActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemAbout);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -602,6 +668,53 @@ public class Updater extends javax.swing.JFrame {
         SearchBtn.setEnabled(true);
     }//GEN-LAST:event_LocalFileBtnActionPerformed
 
+    private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jMenuItemExitActionPerformed
+
+    private void jMenuItemInstructionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInstructionsActionPerformed
+        // TODO add your handling code here:
+        String msg="1. load the dataset either form the online repository (online repo. button) or from a local file (button)."
+                + "\n2. search for a specific event by its acronym."
+                + "\n3. update its metadata when found, "
+                + "\n4. if not found, you can enter the metadata for the new event and an the updated copy of the dataset will be saved in " + System.getProperty("user.dir") + "\\" + " ."
+                + " more information about the dataset can be found on the dataset webpage:http://sda.tech/EVENTS-Dataset/EVENTS.html";
+JOptionPane.showMessageDialog(rootPane, msg, "EVENTSKG Updater API", JOptionPane.INFORMATION_MESSAGE);
+
+    }//GEN-LAST:event_jMenuItemInstructionsActionPerformed
+
+    private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(rootPane, "This API has been developed by: Said Fathalla, PhD student at University of Bonn, Germany. \n Contacts: fathalla@cs.uni-bonn.de  ", "EVENTSKG Updater API", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jMenuItemAboutActionPerformed
+
+    private void jMenuItemOpenRepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenRepoActionPerformed
+        // TODO add your handling code here:
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().browse(new java.net.URI("https://github.com/saidfathalla/EVENTSKG-Dataset"));
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            }
+}
+    }//GEN-LAST:event_jMenuItemOpenRepoActionPerformed
+
+    private void jMenuItemReportIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReportIssueActionPerformed
+        // TODO add your handling code here:
+        
+        if (Desktop.isDesktopSupported()) 
+            try {
+                Desktop.getDesktop().browse(new java.net.URI("https://github.com/saidfathalla/EVENTSKG-Dataset/issues/new"));
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_jMenuItemReportIssueActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -686,6 +799,15 @@ public class Updater extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemAbout;
+    private javax.swing.JMenuItem jMenuItemExit;
+    private javax.swing.JMenuItem jMenuItemInstructions;
+    private javax.swing.JMenuItem jMenuItemOpenRepo;
+    private javax.swing.JMenuItem jMenuItemReportIssue;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
