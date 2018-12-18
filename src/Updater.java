@@ -113,6 +113,7 @@ public class Updater extends javax.swing.JFrame {
 
         SearchBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         SearchBtn.setText("Search");
+        SearchBtn.setEnabled(false);
         SearchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchBtnActionPerformed(evt);
@@ -198,6 +199,7 @@ public class Updater extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setText("URI:");
 
+        jTextField2.setEditable(false);
         jTextField2.setText("jTextField2");
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -314,7 +316,7 @@ public class Updater extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel12)
@@ -509,7 +511,7 @@ public class Updater extends javax.swing.JFrame {
         try {
 //            if(model.isEmpty()) throw new java.net.UnknownHostException();
 //            model.write(System.out);
-            //     model.read("https://saidfathalla.github.io/EVENTS-Dataset/EVENTSKG-40.rdf");
+                 model.read("https://raw.githubusercontent.com/saidfathalla/EVENTSKG-Dataset/master/EVENTKG_R2.rdf");
          //   model.read(new BufferedInputStream(new FileInputStream("D:\\Bonn Research\\My Github Repos\\EVENTSKG-Dataset\\EVENTKG_R2.rdf")), null);
             queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
                     + "PREFIX conference-ontology:<https://w3id.org/scholarlydata/ontology/conference-ontology.owl#> "
@@ -522,9 +524,9 @@ public class Updater extends javax.swing.JFrame {
                     + "?e a ?type. "
                     + "?e seo:belongsToSeries ?series. "
                     + "OPTIONAL { ?e seo:field ?field.} "
-                    + "OPTIONAL {?e seo:holdsInCountry ?country. }"
+                    + "OPTIONAL {?e seo:heldInCountry ?country. }"
                     + "OPTIONAL { ?e seo:city ?city. }"
-                    + "OPTIONAL { ?e seo:EventWebpage ?webpage. }"
+                    + "OPTIONAL { ?e seo:eventWebsite ?webpage. }"
                     + "OPTIONAL { ?e conference-ontology:startDate ?startdate. }"
                     + "OPTIONAL { ?e conference-ontology:endDate ?enddate. }"
                     + "OPTIONAL { ?e seo:submittedPapers ?submittedPapers. }"
@@ -542,7 +544,7 @@ public class Updater extends javax.swing.JFrame {
             if (!results.hasNext()) {
                 qe.close();
                 JOptionPane.showMessageDialog(rootPane, "Event not found. You can add this event by entering metadata of the event and  press Update/Add button.", "EVENTSKG Updater API", JOptionPane.ERROR_MESSAGE);
-                jTextField2.setText("http://purl.org/events_ds/" + jTextField1.getText().replaceAll(" ", "").toUpperCase());
+                jTextField2.setText("http://purl.org/events_ds#" + jTextField1.getText().replaceAll(" ", "").toUpperCase());
                 UpdateBtn.setEnabled(true);
                 return;
             }
@@ -559,22 +561,21 @@ public class Updater extends javax.swing.JFrame {
             jTextField3.setText(soln.getResource("type").toString());
             jComboBox1.setSelectedItem(soln.getResource("type").toString().replaceAll(".+#", "").replaceAll("http://purl.org/seo/", ""));
             jTextField4.setText(soln.getResource("series").toString());
-            jTextField5.setText(soln.getLiteral("field").getLexicalForm());
+            jTextField5.setText(soln.getResource("field").toString());
 
             jTextField8.setText(soln.getLiteral("webpage").getLexicalForm());
 
             jTextField9.setText(soln.getResource("country").toString());
-
             jTextField6.setText(soln.getLiteral("startdate").getLexicalForm());
             jTextField7.setText(soln.getLiteral("enddate").getLexicalForm());
-            jTextField10.setText(soln.getLiteral("city").getLexicalForm());
+            jTextField10.setText(soln.getResource("city").toString());
 
             jTextField11.setText(soln.getLiteral("submittedPapers").getLexicalForm());
             jTextField12.setText(soln.getLiteral("acceptedPapers").getLexicalForm());
             jTextField13.setText(soln.getLiteral("acceptanceRate").getLexicalForm());
 
-            jTextField14.setText(soln.getLiteral("state").getLexicalForm());
-            System.out.println("x ");
+            jTextField14.setText(soln.getResource("state").toString());
+//            System.out.println("x ");            
 
             qe.close();
         } catch (Exception ex) {
