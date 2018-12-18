@@ -1,4 +1,4 @@
-# EVENTSKG Updater: A Java API to update EVENTSKG dataset.
+# EVENTSKG Updater: A Java API for EVENTSKG
 To ensure the sustainability of EVENTSKG, we developed an API for updating and maintaining the dataset. It facilitates the creation and the modification of EVENTSKG resources without going into the details of how this data is represented in the dataset.
 
 ## Features
